@@ -73,13 +73,12 @@ public class Main {
 			System.out.print("\nQuanti posti vuoi disdire? ");
 			int postiInseriti = Integer.valueOf(sc.nextLine());
 			
-			if(postiInseriti > 0 && postiInseriti<= evento.getnPostiPrenotati()) {
+			if(postiInseriti >= 0 && postiInseriti<= evento.getnPostiPrenotati()) {
 				try {
 					for (int i = 0; i < postiInseriti; i++) {
 						evento.disdici(postiInseriti);
 					}
 					evento.ricalcolo(postiInseriti, false);
-//					evento.ricalcoloPostDisdetta(postiInseriti);
 					System.out.println("\n" + evento);
 				}catch (Exception e) {
 					System.err.println(e.getMessage());
@@ -92,7 +91,6 @@ public class Main {
 		}else {
 			System.out.println("\nNessuna disdetta, questo sarà l'evento ↓\n" + evento);
 		}
-		
 		
 		
 	}
