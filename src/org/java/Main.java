@@ -36,9 +36,9 @@ public class Main {
 		System.out.println("\n----------------------------------\n");
 		
 		System.out.print("Vuoi effettuare prenotazioni? [Y/n] ");
-		String input = sc.nextLine();
+		String inputPrenota = sc.nextLine();
 		
-		if(input.toLowerCase().equals("y")) {
+		if(inputPrenota.toLowerCase().equals("y")) {
 			
 			System.out.print("\nQuanti posti vuoi prenotare? ");
 			int postiInseriti = Integer.valueOf(sc.nextLine());
@@ -50,7 +50,7 @@ public class Main {
 					for (int i = 0; i < postiInseriti; i++) {
 					evento.prenota(postiInseriti);
 					}
-					evento.ricalcolo(postiInseriti);
+					evento.ricalcolo(postiInseriti, true);
 					System.out.println("\n" + evento);
 				} catch (Exception e) {
 					System.err.println(e.getMessage());
@@ -63,6 +63,35 @@ public class Main {
 			System.out.println("\n" + evento);
 		}
 		
+		System.out.println("\n----------------------------------\n");
+		
+		System.out.print("Vuoi disdire una prenotazione? [Y/n] ");
+		String inputDisdici = sc.nextLine();
+		
+		if(inputDisdici.toLowerCase().equals("y")) {
+			
+			System.out.print("\nQuanti posti vuoi disdire? ");
+			int postiInseriti = Integer.valueOf(sc.nextLine());
+			
+			if(postiInseriti > 0 && postiInseriti<= evento.getnPostiPrenotati()) {
+				try {
+					for (int i = 0; i < postiInseriti; i++) {
+						evento.disdici(postiInseriti);
+					}
+					evento.ricalcolo(postiInseriti, false);
+//					evento.ricalcoloPostDisdetta(postiInseriti);
+					System.out.println("\n" + evento);
+				}catch (Exception e) {
+					System.err.println(e.getMessage());
+				}
+			} else {
+				System.err.println("hai inserito un numero non valido");
+			}
+			
+			
+		}else {
+			System.out.println("\nNessuna disdetta, questo sarà l'evento ↓\n" + evento);
+		}
 		
 		
 		

@@ -83,26 +83,36 @@ public class Evento {
 		}
 		
 	}
-	
-	//metodo RICALCOLO totale posti
-	public void ricalcolo(int postiInseriti) {
-		try {
-			setnPostiTotale(getnPostiTotale() - postiInseriti);
-		} catch (Exception e) {
-			e.printStackTrace();
+	//metodo RICALCOLO totale posti 
+	public void ricalcolo(int postiInseriti, boolean add) throws Exception {
+		if(add == true) {
+			setnPostiTotale(getnPostiTotale() - postiInseriti);	
+		} else {
+			setnPostiTotale(getnPostiTotale() + postiInseriti);
 		}
-		
 	}
 	
 	//metodo DISDICI
-	public void disdici() {
+	public void disdici(int postiInseriti) throws Exception {
+//		if(getData().isBefore(LocalDate.now()))
+//		{
+//			throw new Exception("Evento non più disponibile");
+//		}
 		
+		if(postiInseriti > getnPostiPrenotati())
+		{
+			throw new Exception("Stai provando a disdire più posti di quanti ne hai prenotati");
+		}else {			
+			setnPostiPrenotati(getnPostiPrenotati() - 1);
+		}
 	}
 	
 	@Override
 	public String toString() {
 		return "Titolo: " + getTitolo() + " | Data: " + getData().format(myFormatObj) + " | Posti totali: " + getnPostiTotale() + " | Posti prenotati: " + getnPostiPrenotati();
 	}
+
+
 
 
 }
