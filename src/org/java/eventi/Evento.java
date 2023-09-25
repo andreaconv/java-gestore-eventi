@@ -67,8 +67,42 @@ public class Evento {
 		this.nPostiPrenotati = nPostiPrenotati;
 	}
 	
+	//metodo PRENOTA
+	public void prenota(int postiInseriti) throws Exception {
+		
+//		if(getData().isBefore(LocalDate.now()))
+//		{
+//			throw new Exception("Evento non più disponibile");
+//		}
+
+		if(postiInseriti > getnPostiTotale())
+		{
+			throw new Exception("Posti non disponibili");
+		}else {			
+			setnPostiPrenotati(getnPostiPrenotati() + 1);
+		}
+		
+	}
+	
+	//metodo RICALCOLO totale posti
+	public void ricalcolo(int postiInseriti) {
+		try {
+			setnPostiTotale(getnPostiTotale() - postiInseriti);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	//metodo DISDICI
+	public void disdici() {
+		
+	}
+	
 	@Override
 	public String toString() {
 		return "Titolo: " + getTitolo() + " | Data: " + getData().format(myFormatObj) + " | Posti totali: " + getnPostiTotale() + " | Posti prenotati: " + getnPostiPrenotati();
 	}
+
+
 }
