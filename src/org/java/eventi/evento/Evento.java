@@ -1,4 +1,4 @@
-package org.java.eventi;
+package org.java.eventi.evento;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +10,7 @@ public class Evento {
 	private int nPostiTotale;
 	private int nPostiPrenotati = 0;
 	//dichiaro la formattazione che voglio avere
-	private final DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	private final DateTimeFormatter myFormatDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
 	//COSTRUTTORE
 	public Evento(String titolo, String data, int nPostiTotale) throws Exception {
@@ -36,7 +36,7 @@ public class Evento {
 	}
 	public void setData(String data) throws Exception {
 		//creo un oggetto LocalDate che prende valore dalla stringa "data" fornita dal imput e convertita a oggetto LocalDate col metodo `parse()` 
-		LocalDate locDate = LocalDate.parse(data, myFormatObj);
+		LocalDate locDate = LocalDate.parse(data, myFormatDate);
 		
 		//TODO aggiungere il messaggio throw new Exception "formato data inserito sbagliato"
 
@@ -107,9 +107,14 @@ public class Evento {
 		}
 	}
 	
+	public String getDataFormatted()
+	{
+		return getData().format(myFormatDate);
+	}
+	
 	@Override
 	public String toString() {
-		return "Titolo: " + getTitolo() + " | Data: " + getData().format(myFormatObj) + " | Posti totali: " + getnPostiTotale() + " | Posti prenotati: " + getnPostiPrenotati();
+		return "Titolo: " + getTitolo() + " | Data: " + getDataFormatted() + " | Posti totali: " + getnPostiTotale() + " | Posti prenotati: " + getnPostiPrenotati();
 	}
 
 
